@@ -1,0 +1,28 @@
+.rule-list {
+  height: 100%;
+}
+
+.rule-list-item {
+  border-left: 3px solid #3f51b5;
+  margin-bottom: 8px;
+  background-color: #f5f7fa;
+  border-radius: 4px;
+}
+
+.rule-list-item-secondary {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 16px;
+  color: #757575;
+}
+
+.rule-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
