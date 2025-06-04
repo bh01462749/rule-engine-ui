@@ -1,0 +1,15 @@
+.stored-rules{
+    background-color:#fff;
+    padding: 2rem 1rem;
+}
+
+.left-content {
+    background-color: red;
+    width: 80%;
+}
+
+.App2 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
