@@ -16,6 +16,7 @@ function ExecutionPage() {
       return ignoreError && ignoreError.apply(this, arguments);
     }
 
+    
   const [transaction, setTransaction] = useState(sampleTransaction);
   const [rules, setRules] = useState([]);
   const [results, setResults] = useState(null);
