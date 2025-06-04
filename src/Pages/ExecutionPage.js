@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Box, Container, Grid, Button, Typography, AppBar, Toolbar } from '@mui/material';
-import RuleEditor from './../Components/RuleEditor/RuleEditor';
+import React, { useState, useEffect } from 'react';
+import { Container, Button, Typography } from '@mui/material';
 import TransactionEditor from './../Components/TransactionEditor/TransactionEditor';
 import RuleList from './../Components/RuleList/RuleList';
 import ResultsPanel from './../Components/ResultsPanel/ResultsPanel';
 import { evaluateRules, sampleRules } from './../Services/api';
 import { sampleTransaction } from './../Services/api';
+import './ExecutionPage.css'
 
 function ExecutionPage() {
     // Silences the ResizeObserver warning
@@ -20,6 +20,29 @@ function ExecutionPage() {
   const [rules, setRules] = useState([]);
   const [results, setResults] = useState(null);
   const [isRuleValid, setIsRuleValid] = useState(false);
+  const [savedModules, setSavedModules] = useState([]);
+
+  const [selectedCodes, setSelectedCodes] = useState([]);
+  const [selectedCodeNames, setSelectedCodeNames] = useState([]);
+
+  const handleCheckboxChange = (rule) => {
+      setSelectedCodes(prevSelected =>
+        prevSelected.includes(rule.code)
+          ? prevSelected.filter(c => c !== rule.code)  // Remove if already selected
+          : [...prevSelected, rule.code]              // Add if not selected
+      );
+
+      setSelectedCodeNames(prevSelected =>
+              prevSelected.includes(rule.name)
+                ? prevSelected.filter(c => c !== rule.name)  // Remove if already selected
+                : [...prevSelected, rule.name]              // Add if not selected
+            );
+    };
+
+  useEffect(()=>{
+    const savedModules = JSON.parse(localStorage.getItem('codeModules')) || [];
+    setSavedModules(savedModules);
+  }, [])
 
   const handleAddRule = (newRule) => {
     setRules([...rules, newRule]);
@@ -34,7 +57,7 @@ function ExecutionPage() {
   const handleEvaluate = async () => {
     try {
     console.log(rules)
-      const response = await evaluateRules(transaction, rules);
+      const response = await evaluateRules(transaction, selectedCodes);
       setResults(response);
     } catch (error) {
       console.error('Evaluation error:', error);
@@ -55,68 +78,82 @@ function ExecutionPage() {
   };
 
   return (
-    <div className="App">
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Transaction Rule Engine
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <div className="App2">
+      <Container
+        maxWidth={false}
+        sx={{
+             flex: '0 0 70%',
+             display: 'flex',
+             flexDirection: 'column',
+             p: 2, // padding
+             bgcolor: 'background.paper',
+             borderRight: '1px solid',
+             borderColor: 'divider'
+        }}
+      >
+        <TransactionEditor
+            transaction={transaction}
+            setTransaction={setTransaction}
+        />
 
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ mb: 4 }}>
-              <TransactionEditor
-                transaction={transaction}
-                setTransaction={setTransaction}
-              />
-            </Box>
+        <RuleList
+          rules={selectedCodeNames}
+          onRemoveRule={handleRemoveRule}
+        />
 
-            <Box sx={{ mb: 4 }}>
-              <RuleEditor
-                initialValue={sampleRules[0]}
-                onSave={handleAddRule}
-                onValidate={setIsRuleValid}
-              />
-            </Box>
+        <Button
+           variant="contained"
+           color="primary"
+           onClick={handleEvaluate}
+           disabled={selectedCodes.length === 0}
+           size="large"
+        >
+           Evaluate Rules
+        </Button>
 
-            <Box sx={{ mb: 4 }}>
-              <RuleList
-                rules={rules}
-                onRemoveRule={handleRemoveRule}
-              />
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} md={6}>
-            <Box sx={{ mb: 4 }}>
-              <ResultsPanel results={results} />
-            </Box>
-          </Grid>
-        </Grid>
-
-        <Box sx={{ display: 'flex', gap: 2, mt: 4 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleEvaluate}
-            disabled={rules.length === 0}
-            size="large"
-          >
-            Evaluate Rules
-          </Button>
-
-          <Button
-            variant="outlined"
-            onClick={handleLoadSampleRules}
-            size="large"
-          >
-            Load Sample Rules
-          </Button>
-        </Box>
+        <ResultsPanel results={results} />
       </Container>
+      <Container
+      maxWidth={false}
+              sx={{
+                flex: '0 0 30%',
+                display: 'flex',
+                flexDirection: 'column',
+                p: 2, // padding
+                bgcolor: 'background.paper'
+              }}
+      >
+               <Typography variant="h6" gutterBottom>
+                       Saved Rules
+               </Typography>
+               {savedModules.map((rule) => (
+                         <div
+                           key={rule.id}
+                           style={{
+                             padding: '12px',
+                             border: '1px solid #e0e0e0',
+                             borderRadius: '4px',
+                             display: 'flex',
+                             alignItems: 'center',
+                             backgroundColor: selectedCodes.includes(rule.code) ? '#f0f8ff' : 'white'
+                           }}
+                         >
+                           <input
+                             type="checkbox"
+                             id={`rule-${rule.id}`}
+                             checked={selectedCodes.includes(rule.code)}
+                             onChange={() => handleCheckboxChange(rule)}
+                             style={{ marginRight: '12px', cursor: 'pointer' }}
+                           />
+                           <label
+                             htmlFor={`rule-${rule.id}`}
+                             style={{ flexGrow: 1, cursor: 'pointer' }}
+                           >
+                             {rule.name}
+                           </label>
+                         </div>
+                       ))}
+            </Container>
     </div>
   );
 }

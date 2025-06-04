@@ -1,11 +1,14 @@
 import React from 'react';
 import { Box, Typography, List, ListItem, ListItemText, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import './RuleList.css';
 
 const RuleList = ({ rules, onRemoveRule }) => {
   return (
-    <Box className="rule-list">
+    <Box className="rule-list"
+        sx={{
+            pt: 3
+        }}
+    >
       <Typography variant="h6" gutterBottom>
         Current Rules ({rules.length})
       </Typography>
@@ -18,18 +21,21 @@ const RuleList = ({ rules, onRemoveRule }) => {
           {rules.map((rule, index) => (
             <ListItem
               key={index}
+              sx= {{
+                borderBottom: '1px solid',
+                borderColor: 'divider'
+              }}
               secondaryAction={
                 <IconButton
                   edge="end"
                   onClick={() => onRemoveRule(index)}
                 >
-                  <DeleteIcon />
+
                 </IconButton>
               }
             >
               <ListItemText
-                primary={`Rule ${index + 1}`}
-                secondary={rule.split('\n')[0].replace(/\/\/\s?/, '')}
+                primary={rule}
               />
             </ListItem>
           ))}
