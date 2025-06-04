@@ -11,16 +11,23 @@ export const evaluateRules = async (transaction, rules) => {
 };
 
 export const sampleTransaction = {
-  "transactionId": "txn123",
-  "userId": "user456",
-  "amount": 1000,
-  "currency": "USD",
-  "merchant": "Amazon",
-  "location": "Online",
-  "additionalData": {
-    "ipAddress": "192.168.1.1",
-    "device": "Mobile"
-  }
+  "TransactionId": "txn123",
+  "CustomerId":"12345678",
+  "CustomerActNum":"1234567890",
+  "CustomerDOB":"01-02-1998",
+  "CustGender":"male",
+  "CustLocation":"India",
+  "CustAccountBalance":1000,
+  "TransactionDate":"05-06-2025",
+  "TransactionTime":"10:00:00+00",
+  "TransactionAmount":50,
+  "Currency":"Pound",
+  "TransactionType":"RTGS",
+  "TerminalId":1342,
+  "FrdScore":100,
+  "CustomerType":"normal",
+  "TransactionCountry":"UK",
+  "MerchantName":"Barclays"
 };
 
 export const sampleVerb = `function greaterThanEqualTo(attribute: any, valueToCompare: any): boolean {
@@ -31,9 +38,9 @@ export const sampleVerb = `function greaterThanEqualTo(attribute: any, valueToCo
     return false;
 }
 
+//* @@Mock **/
 function isInBlackList(blackListName: String, value: String){
-    //this should refer the blackList dataset
-    return true//boolean response
+    return false;
 }
 `
 
