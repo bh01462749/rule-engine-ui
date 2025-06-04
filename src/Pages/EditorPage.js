@@ -45,7 +45,7 @@ function EditorPage() {
     if (savedModules.length > 0 && !activeModule) {
       setActiveModule(savedModules[0].id);
     }
-  }, []);
+  }, [activeModule]);
 
   const updateModuleCode = (id, newCode) => {
     const updatedModules = modules.map(module =>
