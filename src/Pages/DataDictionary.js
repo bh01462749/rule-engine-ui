@@ -7,12 +7,12 @@ import {
   Box,
   Button
 } from '@mui/material';
-import { sampleTransaction, featureNames } from '../Services/api';
+import { sampleTransaction, featureNames, sampleVerb } from '../Services/api';
 
 function DataDictionary() {
   const [activeTab, setActiveTab] = useState('verbs');
   const [editData, setEditData] = useState({
-    verbs: JSON.stringify(featureNames, null, 2),
+    verbs: sampleVerb,
     transaction: JSON.stringify(sampleTransaction, null, 2),
     features: JSON.stringify(featureNames, null, 2)
   });

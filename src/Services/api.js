@@ -23,9 +23,30 @@ export const sampleTransaction = {
   }
 };
 
-export const featureNames = {
-    "maxSSDScore" :0,
-    "minSSDScore" : 0
+export const sampleVerb = `function greaterThanEqualTo(attribute: any, valueToCompare: any): boolean {
+    if(exists(attribut, valueToCompare) && isNaN(attribute) && isNaN(valueToCompare)){
+        return attribute >= valueToCompare;
+    }
+    log(id, "gretaerThanEqualTo()","Rule execution failed, One or more input parameters are null or undefined or invalid and parameters are"+ attribute +"and" + valueToCompare);
+    return false;
+}
+
+function isInBlackList(blackListName: String, value: String){
+    //this should refer the blackList dataset
+    return true//boolean response
+}
+`
+
+export const featureNames =  {
+    card:{
+        lastATMWithdrawalDate: "",
+        lastATMWithdrawlAmount: 0
+    },
+    customer:{
+        fullPostCode: "",
+        outwardPostCode:"",
+        deviceType:""
+    }
 }
 
 export const sampleRules = [
