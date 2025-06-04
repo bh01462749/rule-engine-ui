@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Input, Button, List, Avatar } from 'antd';
 import { UserOutlined, RobotOutlined } from '@ant-design/icons';
+import axios from 'axios';
+import { useRef, useEffect } from 'react';
 
 function ChatBot() {
   const [messages, setMessages] = useState([
@@ -11,34 +13,56 @@ function ChatBot() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
 
-  const handleSendMessage = () => {
+  const [param, setParam] = useState('');
+  
+const fetchData = async () => {
+  try {
+   const res = await axios.get('https://rules-master-backend-fgekhthad7ajeuda.southeastasia-01.azurewebsites.net/api/openai/ask', {
+  params: { prompt: inputValue }
+      });
+      console.log(res.data)
+    // assuming the response is a plain string
+    const botMessage = {
+      sender: 'bot',
+      text: res.data,
+    };
+    console.log(botMessage)
+
+setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      const botMessage = {
+  sender: 'bot',
+  text: "Error fetching data",
+};
+console.log(botMessage)
+    }
+  };
+
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage = { sender: 'user', text: inputValue };
     setMessages([...messages, userMessage]);
     setInputValue('');
     setIsLoading(true);
+    await fetchData();
+    
+  
+  
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponses = [
-        "I am analyzing your code question...",
-        "Here is what I found about that error...",
-        "You might want to check the syntax on line 5.",
-        "That is a common issue. Try using console.log() to debug.",
-        "I recommend checking the documentation for that function.",
-      ];
-
-      const botMessage = {
-        sender: 'bot',
-        text: botResponses[Math.floor(Math.random() * botResponses.length)],
-      };
-
-      setMessages(prev => [...prev, botMessage]);
-      setIsLoading(false);
-    }, 1000);
+    
+    setIsLoading(false);
   };
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   return (
     <div className="chat-bot">
@@ -46,7 +70,7 @@ function ChatBot() {
         <h3>Coding Assistant</h3>
       </div>
 
-      <div className="chat-messages">
+      <div className="chat-messages" style={{ overflowY: 'auto', maxHeight: '400px' }}>
         <List
           dataSource={messages}
           renderItem={(msg) => (
@@ -64,6 +88,7 @@ function ChatBot() {
             </List.Item>
           )}
         />
+        <div ref={bottomRef} />
       </div>
 
       <div className="chat-input">
