@@ -158,6 +158,25 @@ nav a:hover {
   color: #ff4d4f;
 }
 
+/* Add this to your CSS file for better styling of code blocks */
+.code-block {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.code-block pre {
+  background-color: #282c34;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
 /* Chat Bot */
 .chat-toggle {
   position: fixed;
@@ -180,8 +199,8 @@ nav a:hover {
   position: fixed;
   bottom: 80px;
   right: 20px;
-  width: 350px;
-  height: 500px;
+  width: 500px;
+  height: 750px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;

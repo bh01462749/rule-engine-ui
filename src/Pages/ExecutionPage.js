@@ -16,6 +16,7 @@ function ExecutionPage() {
       return ignoreError && ignoreError.apply(this, arguments);
     }
 
+    
   const [transaction, setTransaction] = useState(sampleTransaction);
   const [rules, setRules] = useState([]);
   const [results, setResults] = useState(null);
@@ -43,6 +44,7 @@ function ExecutionPage() {
     setSavedModules(savedModules);
   }, []);
 
+
   const handleRemoveRule = (index) => {
     const updatedRules = [...rules];
     updatedRules.splice(index, 1);
@@ -67,6 +69,7 @@ function ExecutionPage() {
       });
     }
   };
+
 
   return (
     <div className="App2">
