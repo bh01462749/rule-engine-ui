@@ -15,7 +15,7 @@ function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   
 
-  const [param, setParam] = useState('');
+
   
 const fetchData = async () => {
   try {
