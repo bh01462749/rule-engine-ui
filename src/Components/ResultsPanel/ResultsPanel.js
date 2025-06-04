@@ -5,8 +5,6 @@ import {
   Card,
   CardContent,
   List,
-  ListItem,
-  ListItemText,
   Chip
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -17,7 +15,11 @@ const ResultsPanel = ({ results }) => {
   if (!results) return null;
 
   return (
-    <Box className="results-panel">
+    <Box className="results-panel"
+        sx={{
+            pt: 3
+        }}
+    >
       <Typography variant="h6" gutterBottom>
         Evaluation Results
       </Typography>
