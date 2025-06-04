@@ -42,9 +42,8 @@ function ExecutionPage() {
   useEffect(()=>{
     const savedModules = JSON.parse(localStorage.getItem('codeModules')) || [];
     setSavedModules(savedModules);
-  }, [])
+  }, []);
 
- 
 
   const handleRemoveRule = (index) => {
     const updatedRules = [...rules];
@@ -70,7 +69,6 @@ function ExecutionPage() {
       });
     }
   };
-
 
 
   return (
