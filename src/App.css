@@ -287,3 +287,143 @@ nav a:hover {
   background: #1890ff;
   color: white;
 }
+
+/* ---------------------RULE CREATION ------------------ */
+/* App container */
+.App {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f9ff;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Headings */
+h2, h3, h4 {
+  color: #2c3e50;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #419bfb;
+  color: white;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+
+.btn-primary:hover {
+  background-color: #2f8bfc;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #e7e8e8;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-danger {
+  background-color: #fc929d;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #e96e7a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Button group container */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Input and select styling */
+input, select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #459dfa;
+  box-shadow: 0 0 3px rgba(44, 145, 252, 0.4);
+}
+
+/* Condition/Action rows */
+.condition-row,
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* Main layout */
+.builder-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.builder-pane {
+  flex: 1 1 60%;
+  min-width: 300px;
+}
+
+.code-pane {
+  flex: 1 1 35%;
+  min-width: 280px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-height: 90vh;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .builder-container {
+    flex-direction: column;
+  }
+
+  .builder-pane,
+  .code-pane {
+    width: 100%;
+  }
+}
+
+/* Delete icon */
+.delete-icon {
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s ease-in-out;
+}
+
+.delete-icon:hover {
+  color: darkred;
+}
