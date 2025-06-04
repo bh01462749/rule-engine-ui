@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography, List, ListItem, ListItemText, IconButton } from '@mui/material';
-import './RuleList.css';
 
 const RuleList = ({ rules, onRemoveRule }) => {
   return (

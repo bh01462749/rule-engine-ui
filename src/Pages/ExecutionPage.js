@@ -3,7 +3,7 @@ import { Container, Button, Typography } from '@mui/material';
 import TransactionEditor from './../Components/TransactionEditor/TransactionEditor';
 import RuleList from './../Components/RuleList/RuleList';
 import ResultsPanel from './../Components/ResultsPanel/ResultsPanel';
-import { evaluateRules, sampleRules } from './../Services/api';
+import { evaluateRules } from './../Services/api';
 import { sampleTransaction } from './../Services/api';
 import './ExecutionPage.css'
 
@@ -19,7 +19,6 @@ function ExecutionPage() {
   const [transaction, setTransaction] = useState(sampleTransaction);
   const [rules, setRules] = useState([]);
   const [results, setResults] = useState(null);
-  const [isRuleValid, setIsRuleValid] = useState(false);
   const [savedModules, setSavedModules] = useState([]);
 
   const [selectedCodes, setSelectedCodes] = useState([]);
@@ -42,11 +41,7 @@ function ExecutionPage() {
   useEffect(()=>{
     const savedModules = JSON.parse(localStorage.getItem('codeModules')) || [];
     setSavedModules(savedModules);
-  }, [])
-
-  const handleAddRule = (newRule) => {
-    setRules([...rules, newRule]);
-  };
+  }, []);
 
   const handleRemoveRule = (index) => {
     const updatedRules = [...rules];
@@ -71,10 +66,6 @@ function ExecutionPage() {
         }))
       });
     }
-  };
-
-  const handleLoadSampleRules = () => {
-    setRules(sampleRules);
   };
 
   return (

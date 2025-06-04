@@ -23,6 +23,11 @@ export const sampleTransaction = {
   }
 };
 
+export const featureNames = {
+    "maxSSDScore" :0,
+    "minSSDScore" : 0
+}
+
 export const sampleRules = [
   `// Rule 1: Amount check
 if (amount > 5000) {
