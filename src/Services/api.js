@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/evaluate';
+const API_URL = 'https://rules-master-backend-fgekhthad7ajeuda.southeastasia-01.azurewebsites.net/evaluate';
 
 export const evaluateRules = async (transaction, rules) => {
   const response = await axios.post(API_URL, {
