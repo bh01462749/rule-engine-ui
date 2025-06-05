@@ -14,7 +14,7 @@ function ConditionBuilder({ conditions, onChange }) {
       // Add a logic operator *before* the new condition
       updated.push({ type: 'logic', value: '&&' });
     }
-    updated.push({ type: 'condition', field: '', operator: '===', value: '' });
+    updated.push({ type: 'condition', field: 'TransactionId', operator: '===', value: '' });
     onChange(updated);
   };
 
@@ -53,11 +53,22 @@ function ConditionBuilder({ conditions, onChange }) {
         return (
           <div key={idx} className="condition-row">
             <label>Field:</label>
-            <input
-              style={{ width: '100px' }}
+            <select
               value={item.field}
               onChange={(e) => updateCondition(idx, 'field', e.target.value)}
-            />
+            >
+                <option value="TransactionId">TransactionId</option>
+                <option value="CustomerId">CustomerId</option>
+                <option value="CustomerActNum">CustomerActNum</option>
+                <option value="CustomerDOB">CustomerDOB</option>
+                <option value="CustGender">CustomerGender</option>
+                <option value="CustLocation">CustomerLocation</option>
+                <option value="CustAccountBalance">CustAccountBalance</option>
+                <option value="TransactionAmount">TransactionAmount</option>
+                <option value="MerchantName">MerchantName</option>
+                <option value="TransactionCountry">TransactionCountry</option>
+                <option value="Currency">Currency</option>
+            </select>
             <label>Operator:</label>
             <select
               value={item.operator}
