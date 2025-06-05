@@ -76,7 +76,7 @@ function EditorPage() {
         <div className="sidebar-header">
           <h2>Code Modules</h2>
           <button onClick={addNewModule} className="add-button">
-            + Add Module
+            + Add Rule
           </button>
         </div>
         <ModuleList
@@ -95,7 +95,7 @@ function EditorPage() {
           />
         ) : (
           <div className="empty-state">
-            <p>No module selected. Create a new module or select an existing one.</p>
+            <p>No rule selected. Create a new rule or select an existing one.</p>
           </div>
         )}
       </div>
@@ -115,12 +115,12 @@ function EditorPage() {
       {showAddDialog && (
             <div className="modal-overlay">
               <div className="modal-content">
-                <h3>Create New Module</h3>
+                <h3>Create New Rule</h3>
                 <input
                   type="text"
                   value={newModuleName}
                   onChange={(e) => setNewModuleName(e.target.value)}
-                  placeholder="Enter module name"
+                  placeholder="Enter rule name"
                   autoFocus
                 />
                 <div className="modal-actions">
