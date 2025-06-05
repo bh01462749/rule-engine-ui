@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import IfBlock from './IfBlock';
 
 function RuleBuilder() {
+    const [copied, setCopied] = useState(false);
+
   const [ifBlocks, setIfBlocks] = useState([
     {
       id: Date.now(),
@@ -59,6 +61,18 @@ function RuleBuilder() {
     return `${space}if (${conditionStr}) {\n${space}  ${actionStr}\n${childrenStr}\n${space}}`;
   };
 
+  const copyToClipboard = () => {
+      const codeToCopy = ifBlocks.map(generateJSCode).join('\n\n');
+      navigator.clipboard.writeText(codeToCopy)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    };
+
   return (
     <div style={{
       display: 'flex',
@@ -83,6 +97,18 @@ function RuleBuilder() {
       <div style={{ flex: '1 1 400px' }}>
         <h2>Generated Code</h2>
         <pre>{ifBlocks.map(generateJSCode).join('\n\n')}</pre>
+        <button
+                onClick={copyToClipboard}
+                style={{
+                  padding: '5px 10px',
+                  background: '#f5f5f5',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                {copied ? 'Copied!' : 'Copy'}
+              </button>
       </div>
     </div>
   );
